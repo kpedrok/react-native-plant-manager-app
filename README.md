@@ -1,3 +1,7 @@
 # react-native-plant-manager-app
 
-Coming soon!
+# Coming soon!
+
+### Run
+- yarn install
+- expo start
