@@ -1,66 +1,58 @@
-import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
-import colors from '../../styles/colors';
-import wateringImg from '../assets/watering.png';
+import React, { useState } from "react";
+import { Image, SafeAreaView, StyleSheet, Text } from "react-native";
+import colors from "../../styles/colors";
+import wateringImg from "../assets/watering.png";
+import { Button } from "../components/Button";
 
 export function Welcome() {
+  // vetor com duas posicoes primeira é a constante e a segunda é a funcao que atualza esse estado
+  const [visible, setVisible] = useState(false);
+
+  function handleVisibility() {
+    setVisible(true);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
-        Gerencie {'\n'}
-       suas plantas {'\n'}
-       de forma fácil
+        Gerencie {"\n"}
+        suas plantas {"\n"}
+        de forma fácil
       </Text>
-      <Image source={wateringImg} style={styles.image} />
+      {visible && <Image source={wateringImg} style={styles.image} />}
 
       <Text style={styles.subtitle}>
-        Não esqueça mais de regar suas plantas. {'\n'}
+        Não esqueça mais de regar suas plantas. {"\n"}
         Nós cuidamos de lembrar você sempre que precisar.
-        </Text>
+      </Text>
 
-      <TouchableOpacity 
-        style={styles.button} 
-        activeOpacity={ 0.7}>
-        <Text style={styles.buttonText}>></Text>
-      </TouchableOpacity>
+      <Button title=">" onPress={handleVisibility} />
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     color: colors.heading,
-    marginTop: 38
+    marginTop: 38,
   },
   subtitle: {
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
     color: colors.heading,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
-  button: {
-    backgroundColor: colors.green,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 16,
-    marginBottom: 10,
-    height: 56,
-    width: 56
-  },
+
   image: {
     width: 292,
-    height: 284
+    height: 284,
   },
-  buttonText: {
-    color: colors.white,
-    fontSize: 24
-  }
 });
