@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Alert,
@@ -16,7 +17,7 @@ import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 export function UserIdentification() {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -38,6 +39,7 @@ export function UserIdentification() {
 
   async function handleSubmit() {
     if (!name) return Alert.alert("Me diz como chamar você 😢");
+    navigation.navigate("Confirmation");
 
     // try {
     //   await AsyncStorage.setItem("@plantmanager:user", name);
