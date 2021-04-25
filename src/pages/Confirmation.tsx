@@ -31,7 +31,7 @@ export function Confirmation() {
   // } = routes.params as Params;
 
   function handleNextScreen() {
-    // navigation.navigate(nextScreen);
+    navigation.navigate("PlantSelect");
   }
 
   return (
