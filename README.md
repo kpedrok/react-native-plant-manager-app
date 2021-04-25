@@ -18,4 +18,4 @@ ipconfig getifaddr en0
 
 
 ## Start server
- json-server ./src/services/server.json --host 192.168.2.87 --port 3333
+ json-server ./src/services/server.json --host 192.168.2.87 --port 3333 --delay 700

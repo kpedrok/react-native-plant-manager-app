@@ -17,14 +17,13 @@ const AppRoutes: React.FC = () => (
       },
     }}
   >
-    <StackRoutes.Screen name="PlantSelect" component={PlantSelect} />
-
     <StackRoutes.Screen name="Welcome" component={Welcome} />
     <StackRoutes.Screen
       name="UserIdentification"
       component={UserIdentification}
     />
     <StackRoutes.Screen name="Confirmation" component={Confirmation} />
+    <StackRoutes.Screen name="PlantSelect" component={PlantSelect} />
   </StackRoutes.Navigator>
 );
 
