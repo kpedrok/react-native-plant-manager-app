@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import colors from "../../styles/colors";
-import fonts from "../../styles/fonts";
 import wateringImg from "../assets/watering.png";
+import colors from "../styles/colors";
+import fonts from "../styles/fonts";
 
 export function Welcome() {
   return (

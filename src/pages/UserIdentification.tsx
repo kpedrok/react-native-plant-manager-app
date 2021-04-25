@@ -11,9 +11,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import colors from "../../styles/colors";
-import fonts from "../../styles/fonts";
 import { Button } from "../components/Button";
+import colors from "../styles/colors";
+import fonts from "../styles/fonts";
 
 export function UserIdentification() {
   // const navigation = useNavigation();
