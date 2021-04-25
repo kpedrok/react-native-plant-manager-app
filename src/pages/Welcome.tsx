@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import { Image, SafeAreaView, StyleSheet, Text } from "react-native";
+import React from "react";
+import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../../styles/colors";
 import wateringImg from "../assets/watering.png";
-import { Button } from "../components/Button";
 
 export function Welcome() {
-  // vetor com duas posicoes primeira é a constante e a segunda é a funcao que atualza esse estado
-  const [visible, setVisible] = useState(false);
-
-  function handleVisibility() {
-    setVisible(true);
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
@@ -19,14 +11,19 @@ export function Welcome() {
         suas plantas {"\n"}
         de forma fácil
       </Text>
-      {visible && <Image source={wateringImg} style={styles.image} />}
+      <Image 
+      source={wateringImg} 
+      style={styles.image}
+      resizeMode="contain" />
 
       <Text style={styles.subtitle}>
         Não esqueça mais de regar suas plantas. {"\n"}
         Nós cuidamos de lembrar você sempre que precisar.
       </Text>
 
-      <Button title=">" onPress={handleVisibility} />
+      <TouchableOpacity style={styles.button} activeOpacity={0.7} >
+      <Text style={styles.buttonText}> > </Text>
+    </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -34,7 +31,7 @@ export function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   title: {
@@ -47,12 +44,23 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     textAlign: "center",
-    color: colors.heading,
+    color: colors.heading, 
     paddingHorizontal: 20,
   },
-
   image: {
-    width: 292,
-    height: 284,
+    height: Dimensions.get('window').width * 0.7
+  },
+  button: {
+    backgroundColor: colors.green,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 16,
+    marginBottom: 10,
+    height: 56,
+    width: 56,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 24,
   },
 });
