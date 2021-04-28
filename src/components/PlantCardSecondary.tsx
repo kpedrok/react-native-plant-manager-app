@@ -33,6 +33,16 @@ export function PlantCardSecondary({
           </View>
         </Animated.View>
       )}
+      overshootLeft={false}
+      renderLeftActions={() => (
+        <Animated.View>
+          <View>
+            <RectButton style={styles.buttonDone} onPress={handleRemove}>
+              <Feather name='check' size={32} color={colors.white} />
+            </RectButton>
+          </View>
+        </Animated.View>
+      )}
     >
       <RectButton style={styles.container} {...rest}>
         <SvgFromUri uri={data.photo} width={50} height={50} />
@@ -90,5 +100,17 @@ const styles = StyleSheet.create({
     position: 'relative',
     right: 20,
     paddingLeft: 15,
+  },
+  buttonDone: {
+    width: 100,
+    height: 85,
+    backgroundColor: colors.green_dark,
+    marginTop: 15,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    left: 20,
+    paddingRight: 15,
   },
 })

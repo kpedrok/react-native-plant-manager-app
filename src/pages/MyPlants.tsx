@@ -82,7 +82,7 @@ export function MyPlants() {
             />
           )}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flex: 1 }}
+          // contentContainerStyle={{ flex: 1 }}
         />
       </View>
     </View>
@@ -94,8 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 30,
-    paddingTop: 50,
+    paddingHorizontal: 20,
     backgroundColor: colors.background,
   },
   spotlight: {
