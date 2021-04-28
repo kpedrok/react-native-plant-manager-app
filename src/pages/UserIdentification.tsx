@@ -40,10 +40,9 @@ export function UserIdentification() {
 
   async function handleSubmit() {
     if (!name) return Alert.alert('Me diz como chamar você 😢')
-    navigation.navigate('Confirmation')
 
     try {
-      await AsyncStorage.setItem('@plantmanager:user', name) //Add @ and app name to ensure that other app wont overwrite
+      await AsyncStorage.setItem('@plantmanager:user', name)
       navigation.navigate('Confirmation', {
         title: 'Prontinho',
         subtitle: `Agora vamos começar a cuidar das suas plantinhas com muito cuidado.`,
