@@ -17,8 +17,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "plant-manager"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
