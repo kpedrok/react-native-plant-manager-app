@@ -17,7 +17,7 @@
 <br>
 
 <p align="center">
-  <img alt="Moveit" src=".github/plantmanager-preview.png">
+  <img alt="plant-manager" src=".github/plantmanager-preview.png">
 </p>
 
 ---
@@ -67,5 +67,5 @@ Remembering that you need to have a [Figma](http://figma.com/) account to access
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
-
-Made with 💜 by [Pedro Kondak](https://kpedrok.github.io/) 👋
+## 🧙‍♂️ Author 
+[Pedro Kondak](https://kpedrok.github.io/)
