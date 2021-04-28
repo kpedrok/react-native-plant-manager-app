@@ -67,6 +67,5 @@ Remembering that you need to have a [Figma](http://figma.com/) account to access
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
-<!-- ---
 
-Made with 💜 by [Pedro Kondak](https://www.pedrokondak.dev) 👋 -->
+Made with 💜 by [Pedro Kondak](https://kpedrok.github.io/) 👋
