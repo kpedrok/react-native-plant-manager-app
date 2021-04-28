@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import {
   ActivityIndicator,
@@ -33,16 +34,15 @@ interface PlantProps {
 }
 
 export function PlantSelect() {
-  // Plant environments
-  const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+  const [environments, setEnvironments] = useState<EnvironmentProps[]>([]) // Plant environments
   const [plants, setPlants] = useState<PlantProps[]>([])
   const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([])
   const [environmentSelected, setEnvironmentSelected] = useState('all')
   const [loading, setLoading] = useState(true)
-
   const [page, setPage] = useState(1)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [loadedAll, setLoadedAll] = useState(false)
+
+  const navigation = useNavigation()
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment)
@@ -55,7 +55,6 @@ export function PlantSelect() {
     )
     setFilteredPlants(filtered)
   }
-
   async function fetchPlants() {
     const { data } = await api.get(
       `plants?_sort=name&_order=asc&_page=${page}&_limit=8`
@@ -74,7 +73,6 @@ export function PlantSelect() {
     setLoading(false)
     setLoadingMore(false)
   }
-
   function handleFetchMore(distance: number) {
     if (distance < 1) return
 
@@ -91,6 +89,10 @@ export function PlantSelect() {
       },
       ...data,
     ])
+  }
+
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant })
   }
 
   // Runs every time a page is opened
@@ -112,6 +114,7 @@ export function PlantSelect() {
       <View>
         <FlatList
           data={environments}
+          keyExtractor={(item) => String(item.key)}
           renderItem={({ item }) => (
             <EnvironmentButton
               title={item.title}
@@ -128,7 +131,13 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filteredPlants}
-          renderItem={({ item }) => <PlantCardPrimary data={item} />}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <PlantCardPrimary
+              data={item}
+              onPress={() => handlePlantSelect(item)}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}
