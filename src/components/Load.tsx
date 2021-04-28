@@ -1,7 +1,7 @@
-import LottieView from "lottie-react-native";
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import loadAnimation from "../assets/load.json";
+import LottieView from 'lottie-react-native'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import loadAnimation from '../assets/load.json'
 
 export function Load() {
   return (
@@ -13,18 +13,18 @@ export function Load() {
         style={styles.animation}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   animation: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     width: 200,
     height: 200,
   },
-});
+})

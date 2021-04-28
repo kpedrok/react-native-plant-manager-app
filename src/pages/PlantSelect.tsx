@@ -1,110 +1,105 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
   Text,
   View,
-} from "react-native";
-import { EnvironmentButton } from "../components/EnvironmentButton";
-import { Header } from "../components/Header";
-import { Load } from "../components/Load";
-import { PlantCardPrimary } from "../components/PlantCardPrimary";
-import api from "../services/api";
-import colors from "../styles/colors";
-import fonts from "../styles/fonts";
+} from 'react-native'
+import { EnvironmentButton } from '../components/EnvironmentButton'
+import { Header } from '../components/Header'
+import { Load } from '../components/Load'
+import { PlantCardPrimary } from '../components/PlantCardPrimary'
+import api from '../services/api'
+import colors from '../styles/colors'
+import fonts from '../styles/fonts'
 
 interface EnvironmentProps {
-  key: string;
-  title: string;
+  key: string
+  title: string
 }
 
 interface PlantProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
+  id: string
+  name: string
+  about: string
+  water_tips: string
+  photo: string
+  environments: [string]
   frequency: {
-    times: number;
-    repeat_every: string;
-  };
+    times: number
+    repeat_every: string
+  }
 }
 
 export function PlantSelect() {
   // Plant environments
-  const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
-  const [plants, setPlants] = useState<PlantProps[]>([]);
-  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
-  const [environmentSelected, setEnvironmentSelected] = useState("all");
-  const [loading, setLoading] = useState(true);
+  const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+  const [plants, setPlants] = useState<PlantProps[]>([])
+  const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([])
+  const [environmentSelected, setEnvironmentSelected] = useState('all')
+  const [loading, setLoading] = useState(true)
 
-  const [page, setPage] = useState(1);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
+  const [page, setPage] = useState(1)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [loadedAll, setLoadedAll] = useState(false)
 
   function handleEnvironmentSelected(environment: string) {
-    setEnvironmentSelected(environment);
+    setEnvironmentSelected(environment)
 
-    if (environment === "all") {
-      return setFilteredPlants(plants);
+    if (environment === 'all') {
+      return setFilteredPlants(plants)
     }
     const filtered = plants.filter((plant) =>
       plant.environments.includes(environment)
-    );
-    setFilteredPlants(filtered);
+    )
+    setFilteredPlants(filtered)
   }
 
   async function fetchPlants() {
     const { data } = await api.get(
       `plants?_sort=name&_order=asc&_page=${page}&_limit=8`
-    );
+    )
 
-    if (!data) return setLoading(true);
+    if (!data) return setLoading(true)
 
     if (page > 1) {
-      setPlants((oldValue) => [...oldValue, ...data]);
-      setFilteredPlants((oldValue) => [...oldValue, ...data]);
+      setPlants((oldValue) => [...oldValue, ...data])
+      setFilteredPlants((oldValue) => [...oldValue, ...data])
     } else {
-      setPlants(data);
-      setFilteredPlants(data);
+      setPlants(data)
+      setFilteredPlants(data)
     }
 
-    setLoading(false);
-    setLoadingMore(false);
+    setLoading(false)
+    setLoadingMore(false)
   }
 
   function handleFetchMore(distance: number) {
-    if (distance < 1) return;
+    if (distance < 1) return
 
-    setLoadingMore(true);
-    setPage((oldValue) => oldValue + 1);
-    fetchPlants();
+    setLoadingMore(true)
+    setPage((oldValue) => oldValue + 1)
+    fetchPlants()
+  }
+  async function fetchEnvironments() {
+    const { data } = await api.get('plants_environments?_sort=title&_order=asc')
+    setEnvironments([
+      {
+        key: 'all',
+        title: 'Todos',
+      },
+      ...data,
+    ])
   }
 
   // Runs every time a page is opened
   useEffect(() => {
-    async function fetchEnvironments() {
-      const { data } = await api.get(
-        "plants_environments?_sort=title&_order=asc"
-      );
-      setEnvironments([
-        {
-          key: "all",
-          title: "Todos",
-        },
-        ...data,
-      ]);
-    }
-    fetchEnvironments();
-  }, []);
+    fetchEnvironments()
+    fetchPlants()
+  }, [])
 
-  useEffect(() => {
-    fetchPlants();
-  }, []);
-
-  if (loading) return <Load />;
+  if (loading) return <Load />
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -146,7 +141,7 @@ export function PlantSelect() {
         />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -172,7 +167,7 @@ const styles = StyleSheet.create({
   },
   environmentList: {
     height: 40,
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingBottom: 5,
     paddingLeft: 32,
     marginVertical: 32,
@@ -180,6 +175,6 @@ const styles = StyleSheet.create({
   plants: {
     flex: 1,
     paddingHorizontal: 32,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
-});
+})
