@@ -27,7 +27,11 @@ export interface StoragePlantProps {
 }
 
 export async function savePlant(plant: PlantProps): Promise<void> {
-  await registerForPushNotificationsAsync()
+  try {
+    await registerForPushNotificationsAsync()
+  } catch (error) {
+    console.log(error)
+  }
   try {
     const nextTime = new Date(plant.dateTimeNotification)
     const now = new Date()

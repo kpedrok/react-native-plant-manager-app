@@ -40,21 +40,27 @@ export function MyPlants() {
 
   async function loadStorageData() {
     const plantsStored = await loadPlant()
-    const nextTime = formatDistance(
-      new Date(plantsStored[0].dateTimeNotification).getTime(),
-      new Date().getTime(),
-      {
-        locale: pt,
-      }
-    )
-    setNextWatered(`Regue sua ${plantsStored[0].name} daqui a ${nextTime}`)
+
+    if (plantsStored.length > 0) {
+      const nextTime = formatDistance(
+        new Date(plantsStored[0].dateTimeNotification).getTime(),
+        new Date().getTime(),
+        {
+          locale: pt,
+        }
+      )
+      setNextWatered(`Regue sua ${plantsStored[0].name} daqui a ${nextTime}`)
+    } else {
+      setNextWatered(`Ainda não existem lembretes adicionados`)
+    }
+
     setMyPlants(plantsStored)
     setLoading(false)
   }
 
   useEffect(() => {
     loadStorageData()
-  }, [])
+  }, [myPlants])
 
   if (loading) return <Load />
 
